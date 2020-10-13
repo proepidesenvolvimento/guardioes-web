@@ -6,7 +6,6 @@ import {
     ContainerTitle,
     ContainerForm,
     InputBlock,
-    Input,
     SubmitButton,
     EditInput,
     TextArea
@@ -46,7 +45,7 @@ const Contents = ({
   const { handleSubmit } = useForm()
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [content_type, setContentType] = useState("text")
+  const content_type = useState("text")
   const [source_link, setSourceLink] = useState("")
   const [modalEdit, setModalEdit] = useState(false);
   const [editingContent, setEditingContent] = useState({});
@@ -59,7 +58,6 @@ const Contents = ({
 
   const _getContents = async (token) => {
     const response = await getAllContents(token)
-    console.log(response)
     setContents(response.contents)
   }
 
@@ -73,7 +71,6 @@ const Contents = ({
         app_id: user.app_id
       }
     }
-    console.log(data)
     await createContent(data, token)
     setTitle("");
     setBody("");
@@ -139,10 +136,6 @@ const Contents = ({
 
   const handleBody = (value) => {
     setBody(value)
-  }
-
-  const handleContentType = (value) => {
-      
   }
 
   const handleSourceLink = (value) => {

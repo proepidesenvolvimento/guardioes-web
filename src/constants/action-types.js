@@ -16,4 +16,8 @@ export const SET_CONTENTS = 'SET_CONTENTS'
 
 export const SET_GROUP_MANAGERS = 'SET_GROUP_MANAGERS'
 
+export const SET_GROUPS = 'SET_GROUPS'
+
+export const SET_SYNDROMES = 'SET_SYNDROMES';
+
 export const SET_USERS = 'SET_USERS'

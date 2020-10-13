@@ -7,8 +7,6 @@ const validateCnpj = (val) => {
     cnpj = cnpj.replace('/', '');
     cnpj = cnpj.split('');
 
-    console.log(cnpj)
-
     let v1 = 0;
     let v2 = 0;
     let aux = false;

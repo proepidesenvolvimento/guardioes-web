@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const AddContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 22rem;
+  height: 26rem;
   width: 90%;
   align-content: center;
   margin: 0% 5%;

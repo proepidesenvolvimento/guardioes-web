@@ -4,3 +4,5 @@ network.host: 0.0.0.0
 xpack.security.enabled: true
 
 path.repo: ["/usr/share/elasticsearch/backup"]
+# This allows kibana to send out bigger files
+http.max_content_length: 248576000

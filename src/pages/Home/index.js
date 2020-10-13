@@ -6,10 +6,12 @@ import {
 import NavBar from './components/NavBar';
 import Header from 'sharedComponents/Header'
 import Apps from './components/Apps';
+import Groups from './components/Groups';
 import Symptoms from './components/Symptoms';
 import GroupManagers from './components/GroupManagers';
 import Dashboard from './components/Dashboard';
 import Contents from './components/Contents';
+import Syndromes from './components/Syndromes';
 import { connect } from 'react-redux';
 import {
   setToken,
@@ -31,11 +33,10 @@ const Home = ({
 
   useEffect(() => {
     const _loadSession = async () => {
-      // THIS IS TEMPORARY, JUST FOR HOMOLOGATION
-      // const auxSession = await sessionService.loadSession()
-      // const auxUser = await sessionService.loadUser()
-      // setToken(auxSession.token)
-      // setUser(auxUser)
+      const auxSession = await sessionService.loadSession()
+      const auxUser = await sessionService.loadUser()
+      setToken(auxSession.token)
+      setUser(auxUser)
     }
     _loadSession();
   }, [token]);
@@ -62,12 +63,16 @@ const Home = ({
         value: GroupManagers
       },
       {
+        key: "groups",
+        value: Groups
+      },
+      {
         key: "symptoms",
         value: Symptoms
       },
       {
         key: "syndromes",
-        value: "Síndromes"
+        value: Syndromes
       },
       {
         key: "contents",
@@ -90,11 +95,9 @@ const Home = ({
 
   useEffect(() => {
     loadComponents();
-    // THIS IS TEMPORARY, JUST FOR HOMOLOGATION
-    // if (token == "") {
-    //   history.push("/login")
-    // }
-    console.log(token)
+    if (token === "") {
+      history.push("/login")
+    }
   }, [])
 
   const setComponentCallback = (component) => {

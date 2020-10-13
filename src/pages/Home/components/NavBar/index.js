@@ -52,12 +52,15 @@ const NavBar = ({
     {
       key: "dashboard",
       value: "Visualizações"
-    }
+    },
+    {
+      key: "groups",
+      value: "Instituições"
+    },
   ]
 
   const loadCategories = () => {
-    console.log("User type:", user.type)
-    if (user.type === "admin") {
+    if (user.type === "admin") {	
 
     } else if (user.type === "manager") {
       allCategories.splice(0, 4);
@@ -71,7 +74,6 @@ const NavBar = ({
 
   useEffect(() => {
     loadCategories();
-    console.log(user)
   }, [])
 
   const [categories, setCategories] = useState([])

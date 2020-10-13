@@ -38,8 +38,24 @@ export const SubmitButton = styled.button`
   }
 `;
 
+export const EditCheckbox = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-weight: 700;
+  font-size: 20;
+  color: #348EAC;
+  margin-bottom: 1rem;
+  align-items: center;
+`;
+
+export const EditCheckboxInput = styled.input`
+  margin-bottom: .5rem;
+  margin-left: .5rem;
+`;
+
 export const SearchView = styled.div`
   width: 50%;
   align-self: center;
   margin-top: 1.25rem
 `;
+

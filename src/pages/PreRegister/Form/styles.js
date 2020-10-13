@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Popup } from 'semantic-ui-react'
+import { device } from 'utils/devices';
 
 export const Span = styled.span`
   color: red;
@@ -121,23 +122,34 @@ export const SendButtonName = styled.p`
 `;
 
 export const QuestionPopupOrgType = styled(Popup)`
-    width: 230px;
-    height: 20px;
-    padding: 10px;
+    width: 15%;
+    height: 5%;
+    padding: 5px;
     border-radius: 15px;
     border: 1px solid gray;
     background: #FFFFFF;
     margin-bottom: 7px;
     box-shadow: 1px 1px 1px gray;
+
+    @media ${device.laptopL} {
+      height: 5%;
+      width: 25%;
+    };
 `;
 
 export const QuestionPopupCat = styled(Popup)`
-    width: 300px;
-    height: 40px;
-    padding: 10px;
+    width: 25%;
+    height: 5%;
+    padding: 5px;
     border-radius: 15px;
     border: 1px solid gray;
     background: #FFFFFF;
     margin-bottom: 7px;
     box-shadow: 1px 1px 1px gray;
+
+    @media ${device.laptopL} {
+      height: 5%;
+      width: 40%;
+    };
+
 `;

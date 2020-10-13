@@ -3,6 +3,8 @@ import {
   Container,
   EditInput,
   SubmitButton,
+  EditCheckbox,
+  EditCheckboxInput,
   SearchView
 } from './styles';
 import { connect } from 'react-redux';
@@ -17,6 +19,8 @@ import getAllUsers from './services/getAllUsers';
 import Modal from 'react-bootstrap/Modal';
 import moment from 'moment'
 import deleteUser from './services/deleteUser';
+import editUser from './services/editUser';
+import { useForm } from "react-hook-form";
 
 const Users = ({
   setUsers,
@@ -26,17 +30,27 @@ const Users = ({
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const [userShow, setUserShow] = useState({});
+  const [modalEdit, setModalEdit] = useState(false);
+  const [editingUser, setEditingUser] = useState({});
+  const [editName, setEditName] = useState("");
+  const [editBirthdate, setEditBirthdate] = useState(new Date());
+  const [editCountry, setEditCountry] = useState("");
+  const [editGender, setEditGender] = useState("");
+  const [editRace, setEditRace] = useState("");
+  const [editProfessional, setEditProfessional] = useState(false);
+  const { handleSubmit } = useForm();
   const [userSearch, setUserSearch] = useState("");
   const [userList, setUserList] = useState([]);
+
 
   const fields = [
     {
       key: "id",
-      value: "Id."
+      value: "ID"
     },
     {
       key: "user_name",
-      value: "Name"
+      value: "Nome"
     }
   ]
 
@@ -74,6 +88,58 @@ const Users = ({
     _getUsers(token);
   }
 
+  const _editUser = async () => {
+    const data = {
+      "user": {
+        "user_name": editName,
+        "birthdate": editBirthdate,
+        "country": editCountry,
+        "gender": editGender,
+        "race": editRace,
+        "is_professional": editProfessional
+      }
+    };
+    console.log(data);
+    await editUser(editingUser.id, data, token);
+    setModalEdit(false);
+    _getUsers(token);
+  }
+
+  const handleEdit = (content) => {
+    setEditingUser(content);
+    setEditName(content.user_name);
+    setEditBirthdate(content.birthdate);
+    setEditCountry(content.country);
+    setEditGender(content.gender);
+    setEditRace(content.race);
+    setEditProfessional(content.is_professional);
+    setModalEdit(!modalEdit);
+  }
+
+  const handleEditName = (value) => {
+    setEditName(value);
+  }
+
+  const handleEditBirthdate = (value) => {
+    setEditBirthdate(value);
+  }
+
+  const handleEditCountry = (value) => {
+    setEditCountry(value);
+  }
+
+  const handleEditGender = (value) => {
+    setEditGender(value);
+  }
+
+  const handleEditRace = (value) => {
+    setEditRace(value);
+  }
+
+  const handleEditProfessional = (value) => {
+    setEditProfessional(value);
+  }
+
   useEffect(() => {
     const _loadSession = async () => {
       const auxSession = await sessionService.loadSession()
@@ -85,6 +151,94 @@ const Users = ({
 
   return (
     <>
+      <Modal
+        show={modalEdit}
+        onHide={() => setModalEdit(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            Editar Usuário
+          </Modal.Title>
+        </Modal.Header>
+        <form id="editUser" onSubmit={handleSubmit(_editUser)}>
+          <Modal.Body>
+            <EditInput>
+              <label htmlFor="email">E-mail</label>
+              <input
+                className="text-dark"
+                type="text"
+                id="email"
+                value={editingUser.email}
+                disabled
+              />
+            </EditInput>
+
+            <EditInput>
+              <label htmlFor="edit_name">Nome</label>
+              <input 
+                type="text"
+                id="edit_name"
+                value={editName}
+                onChange={(e) => handleEditName(e.target.value)}
+              />
+            </EditInput>
+
+            <EditInput>
+              <label htmlFor="edit_country">País</label>
+              <input 
+                type="text"
+                id="edit_country"
+                value={editCountry}
+                onChange={(e) => handleEditCountry(e.target.value)}
+              />
+            </EditInput>
+
+            <EditInput>
+              <label htmlFor="edit_birthdate">Data de Nascimento</label>
+              <input
+                id="edit_birthdate"
+                type="date"
+                value={moment(editBirthdate).format("YYYY-MM-DD")}
+                onChange={(e) => handleEditBirthdate(e.target.value)}
+              />
+            </EditInput>
+
+            <EditInput>
+              <label htmlFor="edit_gender">Gênero</label>
+              <input 
+                id="edit_gender"
+                type="text"
+                value={editGender}
+                onChange={(e) => handleEditGender(e.target.value)}
+              />
+            </EditInput>
+
+            <EditInput>
+              <label htmlFor="edit_race">Raça</label>
+              <input 
+                id="edit_race"
+                type="text"
+                value={editRace}
+                onChange={(e) => handleEditRace}
+              />
+            </EditInput>
+
+            <EditCheckbox>
+              <label htmlFor="edit_professional">Profissional da Saúde</label>
+              <EditCheckboxInput 
+                id="edit_professional"
+                type="checkbox"
+                value={editProfessional}
+                onChange={() => handleEditProfessional(!editProfessional)}
+              />
+            </EditCheckbox>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <SubmitButton type="submit">Editar</SubmitButton>
+          </Modal.Footer>
+        </form>
+      </Modal>
 
       <Modal
         show={modalShow}
@@ -172,6 +326,7 @@ const Users = ({
           component_height={'40rem'}
           delete_function={_deleteUser}
           token={token}
+          handleEdit={handleEdit}
         />
       </Container>
     </>

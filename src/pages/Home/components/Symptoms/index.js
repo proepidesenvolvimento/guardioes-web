@@ -59,14 +59,14 @@ const Symptoms = ({
       // será usado o app_id do user logado, como feito abaixo
       // "app_id": user.app_id
     }
-    const response = await createSymptom(data, token)
+    await createSymptom(data, token)
     setSymptomName("")
     setSymptomDescription("")
     _getAllSymptoms(token)
   }
 
   const _deleteSymptom = async (id, token) => {
-    const response = await deleteSymptom(id, token)
+    await deleteSymptom(id, token)
     _getAllSymptoms(token)
   }
 
@@ -113,7 +113,7 @@ const Symptoms = ({
     let aux_symptoms = [];
     if (!response.symptoms)
       response.symptoms = [];
-    response.symptoms.map(symptom => {
+    response.symptoms.forEach(symptom => {
       aux_symptoms.push({
         "id": symptom.id,
         "name": symptom.description,

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -26,8 +26,6 @@ const ContentBox = ({
   }) => {
 
     const _deleteApp = async (id, token) => {
-        console.log("id",id)
-        console.log("token", token)
         await delete_function(id, token)
     }
 

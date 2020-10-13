@@ -159,7 +159,7 @@ const GroupManagers = ({
     if (!response.group_managers) {
       response.group_managers = [];
     }
-    response.group_managers.map(group_manager => {
+    response.group_managers.forEach(group_manager => {
       aux_group_managers.push({
         "id": group_manager.id,
         "name": group_manager.name,
@@ -167,9 +167,8 @@ const GroupManagers = ({
         "group_name": group_manager.group_name
       })
     })
-    console.log(groupManagers, aux_group_managers)
     await setGroupManagers(aux_group_managers)
-    console.log(groupManagers)
+    return
   }
 
   useEffect(() => {
@@ -406,15 +405,16 @@ const GroupManagers = ({
                     onChange={(e) => setGroupManagerIdentificationCode(!groupManagerIdentificationCode)}
                   />
                 </CheckboxInputBlock>
-                {groupManagerIdentificationCode ? <InputBlock>
-                  <label htmlFor="len_id_code">Quantidade de caracteres</label>
-                  <Input
-                    type="text"
-                    id="len_id_code"
-                    value={groupManagerLengthIdentificationCode}
-                    onChange={(e) => setGroupManagerLengthIdentificationCode(e.target.value)}
-                  />
-                </InputBlock>
+                {groupManagerIdentificationCode ?
+                  <InputBlock>
+                    <label htmlFor="len_id_code">Quantidade de caracteres</label>
+                    <Input
+                      type="text"
+                      id="len_id_code"
+                      value={groupManagerLengthIdentificationCode}
+                      onChange={(e) => setGroupManagerLengthIdentificationCode(e.target.value)}
+                    />
+                  </InputBlock>
                   : null}
               </Inputs>
               <SubmitButton type="submit">

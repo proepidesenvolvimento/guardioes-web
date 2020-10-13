@@ -50,7 +50,7 @@ const Login = ({
   const makeUserLogin = async (data) => {
     const response = await requestLogin(email, password, items[0].key)
     const responseUser = response.user
-    if (response.authorization != "") {
+    if (response.authorization !== "") {
       setToken(response.authorization);
       setUser({
         ...responseUser,
