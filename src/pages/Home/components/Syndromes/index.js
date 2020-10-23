@@ -99,10 +99,18 @@ const Syndromes = ({
     }
 
     const _editSyndrome = async () => {
+        let symptoms = [];
+        editSymptoms.map(s => {
+            symptoms.push({
+                description: s.label,
+                percentage: s.percentage,
+                app_id: s.app_id
+            })
+        })
         const data = {
             "description": editDescription,
             "details": editDetails,
-            "symptom": editSymptoms
+            "symptom": symptoms
         };
         await editSyndrome(editingSyndrome.id, data, token);
         setEditModal(false);
@@ -112,7 +120,7 @@ const Syndromes = ({
     const handlePercentage = (value, symptom) => {
         setSelected(
             selected.map(s => 
-                s.id === symptom.id ? {... s, percentage: value} : s
+                s.value === symptom.value ? {... s, percentage: value} : s
             )
         );
     }
@@ -120,7 +128,7 @@ const Syndromes = ({
     const handleEditPercentage = (value, symptom) => {
         setEditSymptoms(
             editSymptoms.map(s => 
-                s.id === symptom.id ? {... s, percentage: value} : s
+                s.value === symptom.value ? {... s, percentage: value} : s
             )
         )
     }
@@ -197,7 +205,7 @@ const Syndromes = ({
                         {editSymptoms.map(s => (
                             <EditInput className="bg-light p-2">
                                 <h6>{s.label}</h6>
-                                <label htmlFor={`edit_percentage=${s.value}`}>Porcentagem</label>
+                                <label htmlFor={`edit_percentage-${s.value}`}>Porcentagem</label>
                                 <input
                                     type="number"
                                     id={`edit_percentage-${s.value}`}

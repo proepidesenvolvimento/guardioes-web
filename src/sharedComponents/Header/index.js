@@ -19,7 +19,7 @@ const Header = ({
   setUser
 }) => {
   const logout = () => {
-    if (authenticated === true ){
+    if (authenticated === true ) {
       sessionService.deleteSession()
       sessionService.deleteUser()
       setUser("")
@@ -32,6 +32,16 @@ const Header = ({
         <NavTo to="/">
           Home
         </NavTo>
+        {authenticated === true ?
+          <NavTo to="/panel">
+            Painel
+          </NavTo>
+        : null}
+        {authenticated === false ?
+          <NavTo to="/statistics">
+            Estatísticas
+          </NavTo>
+        : null}
         <NavTo to="/login" onClick={() => logout()}>
           {authenticated === true ? "Logout" : "Login"}
         </NavTo>
