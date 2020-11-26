@@ -1,7 +1,9 @@
+import { colors } from "../colors/colors"
+
 $(function() {
 	var yearCounter = 0;
-	var countryColor = {"Argentina" : "#6dbceb", "Brazil" : "#c8b631", "Canada" : "#369ead", "China" : "#a2d1cf", "Germany" : "#f79647", "India" : "#7f6084", "Japan" : "#4f81bc",
-											"Malawi" : "#369ead", "Nigeria" : "#86b402", "South Korea" : "#52514e", "United Kingdom" : "#a064a1", "United States" : "#c24642", "Zimbabwe" : "#c24642"};
+	var countryColor = {"Argentina" :`${colors.ARGENTINA_COLOR}`, "Brazil" : `${colors.BRAZIL_COLOR}`, "Canada" : `${colors.CANADA_COLOR}`, "China" : `${colors.CHINA_COLOR}`, "Germany" : `${colors.CHINA_COLOR}`, "India" : `${colors.INDIA_COLOR}`, "Japan" : `${colors.JAPAN_COLOR}`,
+											"Malawi" : `${colors.MALAWI_COLOR}`, "Nigeria" : `${colors.NIGERIA_COLOR}`, "South Korea" : `${colors.SOUTH_KOREA_COLOR}`, "United Kingdom" : `${colors.UNITED_KINGDOM_COLOR}`, "United States" : `${colors.UNITED_STATES_COLOR}`, "Zimbabwe" : `${colors.ZIMBABWE_COLOR}`};
 	var countryCode = {"India":"IN","China":"CN","United States":"US"};
 	var yearSlider = document.getElementById('year-slider');
 	var orderedDataPoints = JSON.parse(JSON.stringify(getDataPoint(yearArr[0])));
@@ -251,14 +253,14 @@ $(function() {
 	}
 
 //Bind click event on year slider
-	function bindClickEventToSliderScale() {
+	function bindClickEventToSliderScale(animated) {
 	$(".noUi-value").click( function() {
 		yearSlider.noUiSlider.updateOptions({
 			range: {
 				'min': yearArr[0],
 				'max': yearArr[yearArr.length-1]
 			},
-			animate: true
+			animate: animated
 		});
 		yearSlider.noUiSlider.set($(this).html());
 		yearSlider.noUiSlider.updateOptions({
