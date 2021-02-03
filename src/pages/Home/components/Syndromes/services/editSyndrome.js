@@ -10,6 +10,7 @@ const editSyndrome = async (id, data, token) =>
     )
     .then(async (res) => {
         const response = { data: res.data };
+        alert('Sindrome editado!');
         return response;
     })
     .catch((e) => {

@@ -10,6 +10,7 @@ const createSyndrome = async (data, token) =>
     )
     .then(async (res) => {
         const response = { data: res.data };
+        alert('Sindrome criado!');
         return response;
     })
     .catch((e) => {

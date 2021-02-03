@@ -10,6 +10,7 @@ const createManagers = async (data, token) =>
   )
     .then(async (res) => {
       const response = { data: res.data };
+      alert('Menager criado!');
       return response
     })
     .catch((e) => {

@@ -35,6 +35,7 @@ const Vigilance = ({
 }) => {
   const [syndromeShow, setShowSyndrome] = useState({})
   const [showModal, setShowModal] = useState(false);
+  const [vigilanceEmail, setVigilanceEmail] = useState("");
 
   const loadData = async (token) => {
     const syns = await getAllSyndromes(token)
@@ -67,6 +68,10 @@ const Vigilance = ({
     setVigilanceSyndromes(vs)
   }
 
+  const editEmail = () => {
+    
+  }
+
   const handleSubmit = async () => {
     const data = {
       group_manager: {
@@ -91,17 +96,17 @@ const Vigilance = ({
         <Modal.Body>
           <EditInput>
             <label>ID</label>
-              <input
-                className="text-dark"
-                type="text"
-                value={syndromeShow.id}
-                disabled
+            <input
+              className="text-dark"
+              type="text"
+              value={syndromeShow.id}
+              disabled
             />
           </EditInput>
 
           <EditInput>
             <label>Título</label>
-            <input 
+            <input
               className="text-dark"
               type="text"
               value={syndromeShow.description}
@@ -154,7 +159,7 @@ const Vigilance = ({
                 />
               </div>
             </EditInput>
-          : null}
+            : null}
 
           {syndromeShow.symptoms ? syndromeShow.symptoms.map((symptom) => (
             <EditInput className="bg-light p-2" key={symptom.id}>
@@ -172,13 +177,13 @@ const Vigilance = ({
         </Modal.Body>
 
         <Modal.Footer>
-          <SubmitButton onClick={() => setShowModal(false)}>Voltar</SubmitButton>                    
+          <SubmitButton onClick={() => setShowModal(false)}>Voltar</SubmitButton>
         </Modal.Footer>
       </Modal>
 
       <ContainerContentBox
-      className="shadow-sm"
-      component_height={'35rem'}
+        className="shadow-sm"
+        component_height={'35rem'}
       >
         <ContentBoxHeader>
           <ContentBoxTitle>Síndromes da Vigilância Ativa</ContentBoxTitle>
@@ -186,23 +191,23 @@ const Vigilance = ({
         <ContentBoxTable
           component_height={'35rem'}
         >
-        {syndromes !== null ?
-          syndromes.length > 0 ?
-            <TableComponent
-              contents={syndromes ? syndromes : null}
-              fields={[
-                { key: "id", value: "ID" },
-                { key: "description", value: "Título" }
-              ]}
-              _deleteApp={() => {}}
-              setContentShow={handleShow}
-              setEditingContent={() => {}}
-              token={token}
-              vigilance_syndromes={vigilance_syndromes}
-              setVigilanceSyndromes={setVigilanceSyndromesCallback}
-            /> :
-            <Loading isLoading={true} />
-          :
+          {syndromes !== null ?
+            syndromes.length > 0 ?
+              <TableComponent
+                contents={syndromes ? syndromes : null}
+                fields={[
+                  { key: "id", value: "ID" },
+                  { key: "description", value: "Título" }
+                ]}
+                _deleteApp={() => { }}
+                setContentShow={handleShow}
+                setEditingContent={() => { }}
+                token={token}
+                vigilance_syndromes={vigilance_syndromes}
+                setVigilanceSyndromes={setVigilanceSyndromesCallback}
+              /> :
+              <Loading isLoading={true} />
+            :
             <Table responsive>
               <thead>
                 <tr>
@@ -210,15 +215,27 @@ const Vigilance = ({
                 </tr>
               </thead>
               <tbody>
-                  <tr>
-                    <td></td>
-                  </tr>
+                <tr>
+                  <td></td>
+                </tr>
               </tbody>
             </Table>
-        }
+          }
         </ContentBoxTable>
         <SubmitButton onClick={() => handleSubmit()}>Confirmar Mudanças</SubmitButton>
       </ContainerContentBox>
+
+      <EditInput>
+        <label>Email de Vigilância</label>
+        <TextArea
+          className="text-dark"
+          type="text"
+          onChange={(e) => setVigilanceEmail(e.target.value)}
+          rows="1"
+          value={vigilanceEmail}
+        />
+        <SubmitButton onClick={() => editEmail()}>Setar Email</SubmitButton>
+      </EditInput>
     </Container>
   );
 }
