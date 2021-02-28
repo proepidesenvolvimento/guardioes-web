@@ -82,6 +82,7 @@ const GoData = ({
                 await axios.post(
                     "https://inclusaodigital.unb.br/api/oauth/token",
                     {
+                        headers: { "Access-Control-Allow-Origin": "*" },
                         username: user.username_godata,
                         password: user.password_godata
                     }
@@ -105,9 +106,25 @@ const GoData = ({
     }, []);
 
     const _goDataLogIn = async () => {
+        let userIdGoData
+        await axios.post(
+            "https://inclusaodigital.unb.br/api/users/login",
+            {
+                headers: { "Access-Control-Allow-Origin": "*" },
+                email: inputEmail,
+                password: inputPassword
+            }
+        )
+            .then(async (res) => {
+                userIdGoData = res.data.userId;
+            })
+            .catch((e) => {
+                alert("Falha na autenticação.");
+            });
         await axios.post(
             "https://inclusaodigital.unb.br/api/oauth/token",
             {
+                headers: { "Access-Control-Allow-Origin": "*" },
                 username: inputEmail,
                 password: inputPassword
             }
@@ -123,11 +140,11 @@ const GoData = ({
                 if (syns.syndromes)
                     synds = syns.syndromes
                 setSyndromes(synds);
-
                 const data = {
                     group_manager: {
                         username_godata: inputEmail,
-                        password_godata: inputPassword
+                        password_godata: inputPassword,
+                        userid_godata: userIdGoData
                     }
                 }
                 await editGroupManager(user.id, data, token);
@@ -142,7 +159,7 @@ const GoData = ({
         await axios.get(
             "https://inclusaodigital.unb.br/api/outbreaks",
             {
-                headers: { "Authorization": `${token}` }
+                headers: { "Authorization": `${token}`, "Access-Control-Allow-Origin": "*" }
             }
         )
             .then((res) => {
@@ -182,7 +199,8 @@ const GoData = ({
         const data = {
             group_manager: {
                 username_godata: "",
-                password_godata: ""
+                password_godata: "",
+                userid_godata: null
             }
         }
         await editGroupManager(user.id, data, token);
@@ -270,13 +288,9 @@ const GoData = ({
                                                 </th>
                                             </tr>
                                             <tr>
-                                                {outbreaks.map((outbreak) => (
-                                                    <>
-                                                        <ContentBoxTableHeader style={{ maxWidth: "500px" }} key={outbreak.id}>Nome</ContentBoxTableHeader>
-                                                        <ContentBoxTableHeader style={{ maxWidth: "500px" }} key={outbreak.id}>Descrição</ContentBoxTableHeader>
-                                                        <ContentBoxTableHeader style={{ maxWidth: "500px" }} key={outbreak.id}>Síndrome Conectada</ContentBoxTableHeader>
-                                                    </>
-                                                ))}
+                                                <ContentBoxTableHeader style={{ maxWidth: "500px" }}>Nome</ContentBoxTableHeader>
+                                                <ContentBoxTableHeader style={{ maxWidth: "500px" }}>Descrição</ContentBoxTableHeader>
+                                                <ContentBoxTableHeader style={{ maxWidth: "500px" }}>Síndrome Conectada</ContentBoxTableHeader>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -299,7 +313,7 @@ const GoData = ({
                                                         <td style={{ maxWidth: "500px" }} key={outbreak.id}>{outbreak.description}</td>
                                                         {outbreaksLinkeds.includes(outbreak.id) ?
                                                             (<>
-                                                                <td style={{ maxWidth: "500px", padding: "10px 0" }} key={outbreak.id}>{getSyndromeName(outbreak.id)}<span style={{ height: "15px", width: "15px", backgroundColor: "#5DD39E", borderRadius: "50%", display: "inline-block", marginLeft: "5px" }}></span></td>
+                                                                <td style={{ maxWidth: "500px", padding: "10px 0", fontWeight: "bold", textAlign: 'center' }} key={outbreak.id}>{getSyndromeName(outbreak.id)}</td>
                                                                 <td><button type="button" class="btn btn-danger" onClick={() => unlinkOutbreak(outbreak.id)} style={{ margin: "0", padding: "5px", fontSize: "15px", width: "100px" }}>Desvincular Síndrome</button></td>
                                                             </>)
                                                             :

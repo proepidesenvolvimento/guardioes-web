@@ -10,6 +10,7 @@ import createGroupManager from './services/createGroupManager'
 import deleteGroupManager from './services/deleteGroupManager'
 import editGroupManager from './services/editGroupManager';
 
+import getRootGroup from '../Groups/services/getRootGroup'
 import getChildrenGroups from './../Groups/services/getChildrenGroups'
 import createGroup from './../Groups/services/createGroup'
 
@@ -51,7 +52,7 @@ const GroupManagers = ({
   const [groupManagerTwitter, setGroupManagerTwitter] = useState("")
   const [groupManagerGroup, setGroupManagerGroup] = useState("")
   const [groupManagerIdentificationCode, setGroupManagerIdentificationCode] = useState(false)
-  const [groupManagerLengthIdentificationCode, setGroupManagerLengthIdentificationCode] = useState(0)
+  const [groupManagerLengthIdentificationCode, setGroupManagerLengthIdentificationCode] = useState(1)
   const [groupManagerPassword, setGroupManagerPassword] = useState("")
   const [modalEdit, setModalEdit] = useState(false);
   const [editingGroupManager, setEditingGroupManager] = useState({});
@@ -60,7 +61,7 @@ const GroupManagers = ({
   const [editTwitter, setEditTwitter] = useState("");
   const [editGroup, setEditGroup] = useState("");
   const [editIDCode, setEditIDCode] = useState(false);
-  const [editLengthIDCode, setEditLengthIDCode] = useState(0);
+  const [editLengthIDCode, setEditLengthIDCode] = useState(1);
   const [groupManagerShow, setGroupManagerShow] = useState({});
   const [groupManagerLocale, setGroupManagerLocale] = useState(0)
   const [modalShow, setModalShow] = useState(false);
@@ -137,6 +138,9 @@ const GroupManagers = ({
     setEditName(content.name);
     setEditEmail(content.email);
     setEditGroup(content.group_name);
+    setEditTwitter(content.twitter);
+    setEditIDCode(content.require_id);
+    setEditLengthIDCode(content.id_code_length);
     setModalEdit(!modalEdit);
   }
 
@@ -165,9 +169,11 @@ const GroupManagers = ({
   }
 
   const loadLocales = async (locale_id=null, locale_name='country') => {
-    if(locale_id === null) 
-      locale_id = 3
-    
+    if (locale_id === null) {
+      const response = await getRootGroup()
+      locale_id = response.group.id
+    }
+
     const response = await getChildrenGroups(locale_id)
     switch(locale_name){
       case 'country':
@@ -200,7 +206,9 @@ const GroupManagers = ({
         "name": group_manager.name,
         "email": group_manager.email,
         "group_name": group_manager.group_name,
-        "twitter": group_manager.twitter
+        "twitter": group_manager.twitter,
+        "require_id": group_manager.require_id,
+        "id_code_length": group_manager.id_code_length,
       })
     })
     if (aux_group_managers.length === 0) {
@@ -352,7 +360,7 @@ const GroupManagers = ({
               <EditCheckboxInput
                 type="checkbox"
                 id="edit_id_code"
-                value={editIDCode}
+                checked={editIDCode}
                 onChange={() => handleEditIDCode(!editIDCode)}
               />
             </EditCheckbox>
@@ -403,10 +411,10 @@ const GroupManagers = ({
                 </InputBlock>
                 
                 <InputBlock>
-                    <label htmlFor="name">País</label>
+                    <label htmlFor="country">País</label>
                     <SelectInput
                       type="select"
-                      id="name"
+                      id="country"
                       onChange={(e) => {
                         const id = parseInt(e.target.value)
                         setGroupManagerLocale(id)
@@ -421,10 +429,10 @@ const GroupManagers = ({
                   </InputBlock>
 
                   <InputBlock>
-                    <label htmlFor="name">Estado</label>
+                    <label htmlFor="state">Estado</label>
                     <SelectInput
                       type="select"
-                      id="name"
+                      id="state"
                       onChange={(e) => {
                         const id = parseInt(e.target.value)
                         setGroupManagerLocale(id)
@@ -439,10 +447,10 @@ const GroupManagers = ({
                   </InputBlock>
 
                   <InputBlock>
-                    <label htmlFor="name">Cidade</label>
+                    <label htmlFor="city">Cidade</label>
                     <SelectInput
                       type="select"
-                      id="name"
+                      id="city"
                       onChange={(e) => {
                         const id = parseInt(e.target.value)
                         setGroupManagerLocale(id)
@@ -496,7 +504,7 @@ const GroupManagers = ({
                   <CheckboxInput
                     type="checkbox"
                     id="id_code"
-                    value={groupManagerIdentificationCode}
+                    checked={groupManagerIdentificationCode}
                     onChange={(e) => setGroupManagerIdentificationCode(!groupManagerIdentificationCode)}
                   />
                 </CheckboxInputBlock>
@@ -504,9 +512,10 @@ const GroupManagers = ({
                   <InputBlock>
                     <label htmlFor="len_id_code">Quantidade de caracteres</label>
                     <Input
-                      type="text"
+                      type="number"
                       id="len_id_code"
                       value={groupManagerLengthIdentificationCode}
+                      min="1"
                       onChange={(e) => setGroupManagerLengthIdentificationCode(e.target.value)}
                     />
                   </InputBlock>

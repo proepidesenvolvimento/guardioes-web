@@ -57,7 +57,7 @@ const Dashboard = ({
   let date = props.date || '2020-06-10T07:01:16.923Z' // App launch date
 
   return (
-        <div style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '100%' }}>
           {urls?.length && urls.map((url) => {
             return (
                 <iframe
