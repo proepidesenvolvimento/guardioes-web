@@ -28,6 +28,7 @@
     "react-dom": "^16.13.1",
     "react-drag-drawer": "^3.3.4",
     "react-hook-form": "^6.2.0",
+    "react-icons": "^4.2.0",
     "react-js-pagination": "^3.0.3",
     "react-materialize": "^2.6.0",
     "react-multi-select-component": "^3.0.4",

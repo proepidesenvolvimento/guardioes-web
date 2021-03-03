@@ -1,8 +1,7 @@
 import axios from 'axios';
+import { apiURL } from 'services/urls'
 
-const baseURL = 'http://localhost:3001';
-
-axios.defaults.baseURL = baseURL;
+axios.defaults.baseURL = apiURL;
 axios.defaults.responseType = 'json';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common.Accept = 'application/json';

@@ -4,7 +4,7 @@ import user from './user';
 
 const reducers = combineReducers({
   user,
-  session: sessionReducer
+  session: sessionReducer,
 });
 
 const rootReducer = (state, action) => {
