@@ -81,7 +81,7 @@ const TableComponent = ({
               {vigilance_email === null || vigilance_email === "" ? 
                 <WarningMessage>Você deve possuir um e-mail cadastrado para poder participar</WarningMessage>
                 :
-                <label htmlFor="app_id">Faz parte da Vigilância?</label>
+                <label htmlFor="belongs_to_vigilance">Faz parte da Vigilância?</label>
               }
               <CheckboxInput
                 type="checkbox"

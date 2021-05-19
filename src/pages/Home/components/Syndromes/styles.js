@@ -19,7 +19,6 @@ export const AddSyndromeContainer = styled.div`
     margin-bottom: 2rem;
     background-color: #E5E5E5;
     border-radius: 10px;
-    font-family: argumentum, sans-serif;
     font-style: normal;
 `;
 
@@ -31,14 +30,16 @@ export const ContainerHeader = styled.div`
     height: 70px;
     border-radius: 10px;
     border-bottom: 2px solid rgba(0,0,0,0.125);
+    z-index: 5;
 `;
 
 export const ContainerTitle = styled.h3`
     margin: 0;
-    font-weight: 500;
-    font-size: 24;
+    font-weight: 600;
+    font-family: "ArgentumSans", sans-serif;
+    font-size: 22px;
     color: white;
-    text-shadow: 2px 5px 10px rgba(0,0,0,0,125);
+    text-shadow: 2px 5px 10px rgba(0,0,0,0.25);
     text-align: center;
 `;
 

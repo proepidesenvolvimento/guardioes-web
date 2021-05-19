@@ -1,0 +1,19 @@
+.pagination li.page {
+  margin-left: 5px;
+}
+
+.pagination li a {
+  background-color: #17a2b8;
+  border-radius: 8px;
+  font-family: "ArgentumSans", sans-serif;
+  padding: 10px 15px;
+  color: #ffffff;
+}
+
+.pagination li.active a {
+  background-color: #138496;
+}
+
+.pagination li a:hover {
+  background-color: #138496;
+}

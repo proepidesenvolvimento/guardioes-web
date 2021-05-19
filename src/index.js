@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { CookiesProvider } from 'react-cookie';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import '@fortawesome/fontawesome-free/css/all.min.css';
+import './assets/css/fonts.css';
+// import '@fortawesome/fontawesome-free/css/all.min.css';
 // import 'mdbreact/dist/css/mdb.css';
-import 'assets/fonts/Lovelo-Black.ttf';
-import 'assets/fonts/ArgentumSans-Regular.otf';
 global.jQuery = require('jquery');
 require('bootstrap/dist/js/bootstrap');
 

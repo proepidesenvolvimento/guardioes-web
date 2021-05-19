@@ -10,7 +10,6 @@ export const Container = styled.div`
     margin: 2.5% 5%;
     background-color: #E5E5E5;
     border-radius: 10px 10px 10px 10px;
-    font-family: argumentum, sans-serif;
     font-style: normal;
 
     @media (min-width: 500px) {
@@ -30,8 +29,9 @@ export const ContentBoxHeader = styled.div`
 
 export const ContentBoxTitle = styled.h3`
     margin: 0;
-    font-weight: 500;
-    font-size: 24;
+    font-weight: 600;
+    font-family: "ArgentumSans", sans-serif;
+    font-size: 22px;
     color: white;
     text-shadow: 2px 5px 10px rgba(0,0,0,0.25);
 `;

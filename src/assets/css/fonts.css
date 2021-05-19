@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Lovelo";
+  font-style: normal;
+  font-display: swap;
+  src: local("Lovelo"), url("../fonts/Lovelo-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ArgentumSans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ArgentumSans-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "ArgentumSans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/ArgentumSans-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "ArgentumSans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/ArgentumSans-SemiBold.otf") format("opentype");
+}

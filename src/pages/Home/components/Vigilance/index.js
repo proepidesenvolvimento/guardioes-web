@@ -11,6 +11,9 @@ import {
   TextArea,
   Form,
   Inputs,
+  CheckboxInputBlock,
+  Label,
+  CheckboxInput,
   ContainerForm,
   InputBlock,
   Input,
@@ -40,30 +43,44 @@ const Vigilance = ({
   token,
   user
 }) => {
-  const { handleSubmit } = useForm();
+  const { handleSubmit } = useForm()
   const [syndromeShow, setShowSyndrome] = useState({})
-  const [showModal, setShowModal] = useState(false);
-  const [newEmail, setNewEmail] = useState(user.vigilance_email)
+  const [showModal, setShowModal] = useState(false)
+  const [hasVigilance, setHasVigilance] = useState(false)
+  const [editEmail, setEditEmail] = useState('')
 
-  const _handleUpdateEmail = async () => {
+  const _handleVigilance = async () => {
+    let email = null
+    let syndromes = []
+    
+    if (!hasVigilance || !editEmail) {
+      setVigilanceSyndromes([])
+      setEditEmail('')
+      setHasVigilance(false)
+    } else {
+      email = editEmail
+      syndromes = vigilance_syndromes
+    }
+
     const data = {
       group_manager: {
-        vigilance_email: newEmail
+        vigilance_email: email,
+        vigilance_syndromes: syndromes,
       }
     }
     const response = await editGroupManager(user.id, data, token)
-    
+
     const responseUser = response.data[user.type]
     if (!response.errors) {
         setUser({
             ...responseUser,
             type: user.type
-        });
+        })
         sessionService.saveUser({
             ...responseUser,
             type: user.type
-        });
-        window.location.reload();
+        })
+        window.location.reload()
     }
   }
 
@@ -72,8 +89,10 @@ const Vigilance = ({
     let synds = []
     if (syns.syndromes)
       synds = syns.syndromes
-    setVigilanceSyndromes(user.vigilance_syndromes)
     setSyndromes(synds)
+    setVigilanceSyndromes(user.vigilance_syndromes)
+    setEditEmail(user.vigilance_email)
+    setHasVigilance(user.vigilance_email ? true : false)
   }
 
   useEffect(() => {
@@ -105,6 +124,19 @@ const Vigilance = ({
       }
     }
     const response = await editGroupManager(user.id, data, token)
+
+    const responseUser = response.data[user.type]
+    if (!response.errors) {
+        setUser({
+            ...responseUser,
+            type: user.type
+        })
+        sessionService.saveUser({
+            ...responseUser,
+            type: user.type
+        })
+        window.location.reload()
+    }
   }
 
   return (
@@ -249,29 +281,40 @@ const Vigilance = ({
         <SubmitButton onClick={() => handleSubmitChanges()}>Confirmar Mudanças</SubmitButton>
       </ContainerContentBox>
 
-      {/* -------- EDITAR EMAIL -------- */}
+      {/* -------- EDITAR VIGILANCIA -------- */}
       <ContainerContentBox className="shadow-sm" component_height={'35rem'}>
-        {console.log(user)}
         <ContentBoxHeader>
-          <ContentBoxTitle>Dados Pessoais</ContentBoxTitle>
+          <ContentBoxTitle>Vigilância Ativa</ContentBoxTitle>
         </ContentBoxHeader>
         <ContentBoxTable component_height={'35rem'}>
           <ContainerForm>
-            <form id="editUser" onSubmit={handleSubmit(_handleUpdateEmail)}>
+            <Form id="editUser" onSubmit={handleSubmit(_handleVigilance)}>
               <Inputs>
-                <InputBlock>
-                  <label htmlFor="email">E-mail</label>
-                  <Input
-                    type="email"
-                    id="email"
-                    placeholder='Não possui e-mail cadastrado'
-                    value={newEmail || null}
-                    onChange={(e) => setNewEmail(e.target.value)}
+                <CheckboxInputBlock>
+                  <Label htmlFor="has_vigilance">Fornecer Vigilância Ativa</Label>
+                  <CheckboxInput
+                      type="checkbox"
+                      id="has_vigilance"
+                      checked={hasVigilance}
+                      onChange={() => setHasVigilance(!hasVigilance)}
                   />
+                </CheckboxInputBlock>
+
+                {hasVigilance ?
+                  <InputBlock>
+                    <Label htmlFor="email">E-mail</Label>
+                    <Input
+                      type="email"
+                      id="email"
+                      placeholder='Não possui e-mail cadastrado'
+                      value={editEmail}
+                      onChange={(e) => setEditEmail(e.target.value)}
+                    />
                   </InputBlock>
-              </Inputs>   
-              <SubmitButton type="submit">Editar E-mail</SubmitButton>
-            </form>
+                : null}
+              </Inputs>
+              <SubmitButton type="submit">Editar Vigilância</SubmitButton>
+            </Form>
           </ContainerForm>
         </ContentBoxTable>
       </ContainerContentBox>

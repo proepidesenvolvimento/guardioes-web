@@ -16,11 +16,11 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0% 2%;
+  z-index: 5;
 `;
 
 
 export const Logo = styled.img`
-  width: 80px;
   height: 35px;
 `;
 
@@ -37,10 +37,9 @@ export const HeaderNav = styled.div`
 
 export const NavTo = styled(Link)`
     text-decoration: none;
-    font-family: argumentum, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
+    font-family: "ArgentumSans", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
     line-height: 1.825rem;
     color: #FFFFFF;
     margin-left: 10px;
@@ -52,10 +51,9 @@ export const NavTo = styled(Link)`
 
 export const UserName = styled.h1`
     text-decoration: none;
-    font-family: argumentum, sans-serif;
-    font-style: normal;
+    font-family: "ArgentumSans", sans-serif;
     font-weight: 500;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.825rem;
     color: #FFFFFF;
     @media ${device.mobileL} {

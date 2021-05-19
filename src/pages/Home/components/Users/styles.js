@@ -67,19 +67,34 @@ export const PaginationDiv = styled.div`
   justify-content: center;
   width: 100%;
   align-items: center;
+  margin-bottom: 15px;
+`;
+
+export const Search = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const SearchInputDiv  = styled(EditInput)`
   width: 60%;
 `;
 
-export const SearchBtn = styled(EditInput)`
-  align-self: flex-end;
-  margin-left: 1rem;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 0 0.5rem;
+export const SearchInput = styled.input`
+  width: 80%;
+  background-color: #5DD39E;
+  border: 0;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #fff;
+  padding: 8px;
+`;
+
+export const SearchBtn = styled.button`
   cursor: pointer;
-  justify-content: center;
-  align-content: center;
+  background-color: #17a2b8;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  padding: .5rem 1rem .5rem 1rem;
+  margin-left: 1rem;
 `

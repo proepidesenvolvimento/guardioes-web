@@ -38,7 +38,6 @@ export const FieldDiv = styled.div`
 export const FieldName = styled.label`
     float: left;
     margin: 10px 0px 5px 10px;
-    font-family: argumentum, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 17px;
@@ -98,7 +97,6 @@ export const DownloadBtn = styled.a`
 export const ButtonName = styled.p`
     margin: 5px;
     text-align: center;
-    font-family: argumentum, sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
@@ -123,7 +121,6 @@ export const SendButtonName = styled.p`
     text-align: center;
     text-decoration: none;
     margin: 9px;
-    font-family: argumentum, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 17px;

@@ -4,6 +4,11 @@ export const modelsCheckboxes = [
         value: "user"
     },
     {
+
+        label: "Gerir Municípios",
+        value: "citymanager"
+    },
+    {
         label: "Gerir Conteúdos",
         value: "content"
     },

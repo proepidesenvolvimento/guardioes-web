@@ -20,7 +20,6 @@ export const ContainerContentBox = styled.div`
     margin: 2.5% 5%;
     background-color: #E5E5E5;
     border-radius: 10px 10px 10px 10px;
-    font-family: argumentum, sans-serif;
     font-style: normal;
 
     @media (min-width: 500px) {
@@ -40,8 +39,9 @@ export const ContentBoxHeader = styled.div`
 
 export const ContentBoxTitle = styled.h3`
     margin: 0;
-    font-weight: 500;
-    font-size: 24;
+    font-weight: 600;
+    font-family: "ArgentumSans", sans-serif;
+    font-size: 22px;
     color: white;
     text-shadow: 2px 5px 10px rgba(0,0,0,0.25);
 `;
@@ -114,6 +114,31 @@ export const Form = styled.form`
 export const Inputs = styled.div`
   display: flex;
   flex-flow: row wrap;
+`;
+
+export const CheckboxInputBlock = styled.div`
+  width: 250px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-weight: 700;
+  color: #348EAC;
+  text-shadow: 2px 5px 10px rgba(0,0,0,0.125);
+  margin-bottom: 1rem;
+  margin-right: 50px;
+`;
+
+export const Label = styled.label` 
+  margin: 0;
+  padding-right: 20px;
+`;
+
+export const CheckboxInput = styled.input` 
+  border: 2px solid #348EAC;
+  border-radius: 5px;
+  transition: opacity 0.2s;
+  padding-left: 10px;
+  cursor: pointer;
 `;
 
 export const InputBlock = styled.div`

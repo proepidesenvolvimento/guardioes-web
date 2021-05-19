@@ -45,12 +45,9 @@ export const OptionButton = styled.button`
 `;
 
 export const OptionName = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
-  font-family: 'PT Sans', sans-serif;
-  font-style: normal;
-  font-weight: bold;
+  font-family: "ArgentumSans", sans-serif;
+  font-weight: 600;
   font-size: 17px;
   line-height: 21px;
-
   color: #FFFFFF;
 `;

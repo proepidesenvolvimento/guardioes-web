@@ -28,7 +28,6 @@ export const OptionButton = styled.button`
   border-radius: 10px;
   border: ${props => props.selected ? "2px solid #348EAC" : "2px solid #FFFFFF"};
   background: ${props => props.selected ? "#348EAC" : "transparent"};
-  box-shadow: ${props => props.selected ? "0px 4px 4px rgba(0, 0, 0, 0.25)" : "none"};
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -39,11 +38,9 @@ export const OptionButton = styled.button`
 `;
 
 export const OptionName = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
-  font-family: 'PT Sans', sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 17px;
+  font-family: "ArgentumSans", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 21px;
   color: #FFFFFF;
 `;

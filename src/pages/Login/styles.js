@@ -123,7 +123,6 @@ export const SendButtonName = styled.p`
     text-align: center;
     text-decoration: none;
     margin: 10px;
-    font-family: argumentum, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;

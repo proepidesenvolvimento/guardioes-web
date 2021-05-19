@@ -84,7 +84,7 @@ const Groups = ({
     description: "default",
     code: "",
     children_label: null,
-    parent_id: 0
+    parent_id: null
   })
 
   const [editingGroup, setEditingGroup] = useState({});
@@ -114,7 +114,7 @@ const Groups = ({
   }
 
   const _createGroup = async () => {
-    if(creatingGroup.description === '' || creatingGroup.parent_id === 0){
+    if(creatingGroup.description === '' || creatingGroup.parent_id === null){
       return alert('Erro, verifique os dados ou contate um administrador!')
     } else {
       const response = await createGroup(creatingGroup, token)
@@ -162,7 +162,7 @@ const Groups = ({
 
   const clearData = () => {
     setCreatingGroup({
-      parent_id: 0,
+      parent_id: null,
       code: "",
       description: "",
       children_label: null
@@ -467,7 +467,7 @@ const Groups = ({
             {/* ------- SUBGRUPO ------- */}
             {editingGroup.children_label ? 
               <EditInput>
-                <label htmlFor="edit_code">SubGrupo</label>
+                <label htmlFor="edit_code">Subgrupo</label>
                 <input
                   type="text"
                   id="edit_subgrupo"
@@ -477,10 +477,10 @@ const Groups = ({
               </EditInput>
               :
               <>
-                <SubmitButton type="reset" onClick={() => {setAddSubGroup(true)}}>Adicionar SubGrupo</SubmitButton>
+                <SubmitButton type="reset" onClick={() => {setAddSubGroup(true)}}>Adicionar Subgrupo</SubmitButton>
                 {addSubGroup ? 
                   <EditInput>
-                    <label htmlFor="edit_code">Adicionar SubGrupo</label>
+                    <label htmlFor="edit_code">Adicionar Subgrupo</label>
                     <input
                       type="text"
                       id="edit_subgrupo"
@@ -742,7 +742,7 @@ const Groups = ({
               </InputBlock>
 
               <SubmitButton type="submit">
-                Adicionar {groupLabel}
+                Adicionar em {groupLabel}
               </SubmitButton>
             </Form>
 

@@ -25,7 +25,8 @@ const Header = ({
   const usersTypes = {
     "admin": "Administrador",
     "manager": "Gerente",
-    "group_manager": "Instituição"
+    "city_manager": "Município",
+    "group_manager": "Instituição",
   }
 
   useEffect(() => {

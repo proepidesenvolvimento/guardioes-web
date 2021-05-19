@@ -33,6 +33,8 @@ const ContentBox = ({
     handleShow(content);
   };
 
+  const object = title ? title.split(' - ')[0] : ''
+
   return (
     <Container
       className="shadow-sm"
@@ -59,12 +61,12 @@ const ContentBox = ({
           <Table responsive>
             <thead>
               <tr>
-                <th>{title} vazio</th>
+                <th>{object} vazio</th>
               </tr>
             </thead>
             <tbody>
                 <tr>
-                  <td>Não há nada cadastrado em {title}.</td>
+                  <td>Não há nada encontrado em {object}.</td>
                 </tr>
             </tbody>
           </Table>
