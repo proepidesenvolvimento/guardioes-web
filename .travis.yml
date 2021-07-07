@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+  - stable
+
+branches:
+  only:
+    - development
+    - master
+
+env:
+  global:
+    - CC_TEST_REPORTER_ID=27dd146710c70f3d67ffe244bd1effff61cbae4cce257fe1b4026439fccc25c7
+
+install:
+  - npm install --legacy-peer-deps
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+jobs:
+  include:
+    - stage: tests
+      script: npm run test
+
+after_success:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t lcov coverage/lcov.info
